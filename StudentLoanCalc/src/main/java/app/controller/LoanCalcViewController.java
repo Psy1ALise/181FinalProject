@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pkgLogic.Loan;
 import pkgLogic.Payment;
 
 import java.net.URL;
@@ -35,24 +36,55 @@ public class LoanCalcViewController implements Initializable   {
 	private DatePicker PaymentStartDate;
 	
 	@FXML
-	private Label lblTotalPayemnts;
-
+	private TextField AdditionalPayment;
+	
+	@FXML
+	private Label lblTotalPayments;
+	
+	@FXML
+	private Label lblTotalInterest;
+	
+	@FXML 
+	private Label lblRatePerMonth;
 	
 	@FXML
 	private TableView<Payment> tvResults;
 	
 	@FXML
 	private TableColumn<Payment, Integer> colPaymentNumber;
+
+	@FXML
+	private TableColumn<Payment, Double> colPayment;
 	
+	@FXML
+	private TableColumn<Payment, Double> colInterest;
+	
+	@FXML
+	private TableColumn<Payment, LocalDate> colDate;
+	
+	@FXML
+	private TableColumn<Payment, Double> colAdditionalPMT;
+	
+	@FXML
+	private TableColumn<Payment, Double> colPrinciple;
+	
+	@FXML
+	private TableColumn<Payment, Double> colBalance;
+	
+
 	
 	private ObservableList<Payment> paymentList = FXCollections.observableArrayList();
 	
-	//TODO: Account for all the other columns		
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		colPaymentNumber.setCellValueFactory(new PropertyValueFactory<>("paymentNbr"));
-		//TODO: Add a 'setCellValueFactor' entry for each column, mapping to each attribute in Payment
-		
+		colDate.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
+		colPayment.setCellValueFactory(new PropertyValueFactory<>("Payment"));
+		colInterest.setCellValueFactory(new PropertyValueFactory<>("Interest"));
+		colAdditionalPMT.setCellValueFactory(new PropertyValueFactory<>("AdditionalPayment"));
+		colPrinciple.setCellValueFactory(new PropertyValueFactory<>("Principle"));
+		colBalance.setCellValueFactory(new PropertyValueFactory<>("Balance"));
 		tvResults.setItems(paymentList);
 	}
 
@@ -68,27 +100,21 @@ public class LoanCalcViewController implements Initializable   {
 	 */
 	@FXML
 	private void btnCalcLoan(ActionEvent event) {
-
-		//	Examples- how to read data from the form
-		double dLoanAmount = Double.parseDouble(LoanAmount.getText());		
-		lblTotalPayemnts.setText("123");		
-		LocalDate localDate = PaymentStartDate.getValue();
 		
+		double dLoanAmount = Double.parseDouble(LoanAmount.getText());	
+		double interestRate = Double.parseDouble(InterestRate.getText());
+		int term = Integer.parseInt(NbrOfYears.getText());
+		double additionalPayment = Double.parseDouble(AdditionalPayment.getText());
+		LocalDate Date = PaymentStartDate.getValue();
+		boolean fft = true;
+		double futureValue = 0;
+		Loan myloan = new Loan(Date, dLoanAmount, interestRate, additionalPayment, term);
+		
+		lblTotalPayments.setText(myloan.getTotalPayment());	
+		lblTotalInterest.setText(myloan.getTotalInterest());
+		tvResults.setItems(paymentList);
 		paymentList.addAll();
-		/*
-		 * When this button is clicked, you need to do the following:
-		 * 
-		 * 1) Clear the table
-		 * 2) Clear the results fields (Total Payments, Total Interest)
-		 * 3) You're going to create 'n' payments based on the data you give.  You'll calculate and
-		 * 		carry forward 'balance', because you're going to have to hand calculate that month's
-		 * 		interest.
-		 * Payment# - you'll set this, counting from 1 to N
-		 * Due Date - based on the given date.  method .plusMonths(1) will calculate date + 1 month.
-		 * Payment  - Calculate based on PMT function (which is your minimum payment)
-		 * Additional Payment - based on Additional Payment given by user
-		 * Interest - Calculate based on 
-		 */
+	
 		
 	}
 	

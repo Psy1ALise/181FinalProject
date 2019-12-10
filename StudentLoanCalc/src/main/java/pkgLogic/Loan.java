@@ -34,6 +34,11 @@ public class Loan {
 		}
 	}
 	
+	public double getLoanAmount() {
+		return LoanAmount;
+	}
+	
+	
 	public LocalDate getstartDate() {
 		return startDate;
 	}
@@ -49,8 +54,30 @@ public class Loan {
 	public double getInterestRate() {
 		return InterestRate;
 	}
+	
+	public int getTerm() {
+		return Term;
+	}
 
 	public double getAdditionalPayment() {
 		return AdditionalPayment;
 	}
+
+	public String getTotalPayment() {
+		double sum = 0;
+		for (Payment p: loanPayments) {
+			sum += p.getInterestPayment();
+		}
+		return ""+(Math.round((sum+LoanAmount)*100.0)/100.0);
+	}
+
+	public String getTotalInterest() {
+		double sum=0;
+		for(Payment p:loanPayments) {
+			sum+=p.getInterestPayment();
+		}
+		return ""+Math.round(sum*100.0)/100.0;
+	}
+	
+	
 }

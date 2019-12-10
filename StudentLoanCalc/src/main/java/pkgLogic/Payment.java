@@ -25,6 +25,10 @@ public class Payment {
 		
 		this.EndingBalance = beginningBalance - Principle;
 	}
+	
+	private double getPrinciplePayment() {
+		return Principle;
+	}
 
 	public int getPaymentNbr() {
 		return PaymentNbr;
@@ -49,6 +53,7 @@ public class Payment {
 	public double getEndingBalance() {
 		return EndingBalance;
 	}
+
 	
 	
 }

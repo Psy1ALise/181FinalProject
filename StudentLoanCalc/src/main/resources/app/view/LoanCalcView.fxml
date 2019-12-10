@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="615.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoanCalcViewController">
+<BorderPane prefHeight="615.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoanCalcViewController">
 	<top>
 		<HBox alignment="CENTER" prefHeight="21.0" prefWidth="814.0" BorderPane.alignment="CENTER" />
 	</top>
@@ -55,6 +55,7 @@
 								<TextField fx:id="InterestRate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 								<TextField fx:id="NbrOfYears" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 								<DatePicker fx:id="PaymentStartDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="AdditionalPayment" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 							</children>
 						</GridPane>
 						<HBox prefHeight="152.0" prefWidth="88.0" />
@@ -74,6 +75,7 @@
 								<Label text="Total Payments" />
 								<Label text="Total Interest" GridPane.rowIndex="1" />
 								<Label fx:id="lblTotalPayemnts" prefHeight="18.0" prefWidth="174.0" GridPane.columnIndex="1" />
+                        <Label fx:id="lblTotalInterest" prefHeight="18.0" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 							</children>
 						</GridPane>
 					</children>
@@ -83,12 +85,12 @@
 						<TableView fx:id="tvResults" prefHeight="309.0" prefWidth="815.0">
 							<columns>
 								<TableColumn fx:id="colPaymentNumber" prefWidth="75.0" text="Payment #" />
-								<TableColumn prefWidth="114.0" text="Due Date" />
-								<TableColumn prefWidth="102.0" text="Payment" />
-								<TableColumn prefWidth="143.0" text="Additonal Payment" />
-								<TableColumn prefWidth="111.0" text="Interest" />
-								<TableColumn prefWidth="146.0" text="Principle" />
-								<TableColumn prefWidth="122.0" text="Balance" />
+								<TableColumn fx:id="colDate" prefWidth="114.0" text="Due Date" />
+								<TableColumn fx:id="colPayment" prefWidth="102.0" text="Payment" />
+								<TableColumn fx:id="colAdditionalPMT" prefWidth="143.0" text="Additonal Payment" />
+								<TableColumn fx:id="colInterest" prefWidth="111.0" text="Interest" />
+								<TableColumn fx:id="colPrinciple" prefWidth="146.0" text="Principle" />
+								<TableColumn fx:id="colBalance" prefWidth="122.0" text="Balance" />
 							</columns>
 						</TableView>
 					</children>
